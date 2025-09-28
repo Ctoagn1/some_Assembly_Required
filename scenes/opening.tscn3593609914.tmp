@@ -1,0 +1,119 @@
+[gd_scene load_steps=12 format=3 uid="uid://bkjdj7klksada"]
+
+[ext_resource type="FontFile" uid="uid://dd41ur05wt6mc" path="res://Perfect DOS VGA 437.ttf" id="1_y6ged"]
+[ext_resource type="Script" uid="uid://cbqlawdmtcuye" path="res://cutscene.gd" id="2_fvetl"]
+[ext_resource type="AudioStream" uid="uid://c3l1jhwsh4vuw" path="res://old-desktop-pc-booting-24280.mp3" id="3_drfco"]
+[ext_resource type="Material" uid="uid://ben5gbrlsk1t5" path="res://terminal.tres" id="3_jo2c7"]
+[ext_resource type="AudioStream" uid="uid://3cx8qpg6xcxi" path="res://Record (online-voice-recorder.com)(1)-[AudioTrimmer.com](1).mp3" id="4_jo2c7"]
+[ext_resource type="Texture2D" uid="uid://chsbrc7dtip7x" path="res://assets/MainBackgroundFinal.png" id="6_sc7q2"]
+[ext_resource type="Texture2D" uid="uid://buqjdikgrqxba" path="res://assets/PaperFinal.png" id="7_7f2m3"]
+[ext_resource type="PackedScene" path="res://scenes/fadingpaper.tscn" id="8_nhif4"]
+
+[sub_resource type="Animation" id="Animation_272bh"]
+resource_name = "opacity"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D3:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_5vw27"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D3:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kek77"]
+_data = {
+&"RESET": SubResource("Animation_5vw27"),
+&"opacity": SubResource("Animation_272bh")
+}
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect3" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 364.0
+offset_top = 78.0
+offset_right = 964.0
+offset_bottom = 422.0
+color = Color(0, 0, 0, 1)
+
+[node name="TerminalBoot" type="RichTextLabel" parent="ColorRect3"]
+layout_mode = 0
+offset_right = 600.0
+offset_bottom = 344.0
+theme_override_fonts/normal_font = ExtResource("1_y6ged")
+theme_override_font_sizes/normal_font_size = 24
+script = ExtResource("2_fvetl")
+
+[node name="Startup" type="AudioStreamPlayer" parent="ColorRect3/TerminalBoot"]
+stream = ExtResource("3_drfco")
+
+[node name="ErrBeep" type="AudioStreamPlayer" parent="ColorRect3/TerminalBoot"]
+stream = ExtResource("4_jo2c7")
+volume_db = -5.725
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+z_index = 1
+material = ExtResource("3_jo2c7")
+layout_mode = 0
+offset_left = 364.0
+offset_top = 78.0
+offset_right = 964.0
+offset_bottom = 422.0
+mouse_filter = 2
+color = Color(1, 1, 1, 0.28627452)
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(642, 360)
+scale = Vector2(1.3333331, 1.3333331)
+texture = ExtResource("6_sc7q2")
+
+[node name="Paper" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(642, 359.99997)
+scale = Vector2(1.3333334, 1.3333333)
+texture = ExtResource("7_7f2m3")
+
+[node name="TextureButton" type="TextureButton" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 18.0
+offset_top = 219.0
+offset_right = 189.0
+offset_bottom = 393.0
+
+[node name="fadingpaper" parent="." instance=ExtResource("8_nhif4")]
+visible = false
+position = Vector2(151.84657, 311)
+scale = Vector2(1.2764492, 1.2542372)
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="fadingpaper"]
+root_node = NodePath("../..")
+libraries = {
+&"": SubResource("AnimationLibrary_kek77")
+}

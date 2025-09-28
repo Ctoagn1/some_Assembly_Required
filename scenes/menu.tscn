@@ -1,0 +1,142 @@
+[gd_scene load_steps=14 format=3 uid="uid://bymkc5dob7aw"]
+
+[ext_resource type="AudioStream" uid="uid://bh3evxbuu62y0" path="res://computer-humming-236384.mp3" id="1_4ytvr"]
+[ext_resource type="FontFile" uid="uid://dd41ur05wt6mc" path="res://Perfect DOS VGA 437.ttf" id="1_con2f"]
+[ext_resource type="AudioStream" uid="uid://cvdtbfofqkj8h" path="res://assets/Boot Sequence LV 1.mp3" id="1_v86rl"]
+[ext_resource type="Script" uid="uid://3r3nt0lr3h7w" path="res://run_button.gd" id="2_mhnvy"]
+[ext_resource type="Script" uid="uid://bidwbxt05l5vu" path="res://quit_button.gd" id="3_4ytvr"]
+[ext_resource type="Material" uid="uid://ben5gbrlsk1t5" path="res://terminal.tres" id="4_mhnvy"]
+[ext_resource type="Script" uid="uid://bi8fy0p7prro5" path="res://reset_button.gd" id="6_g3eks"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g3eks"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v86rl"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_13sgg"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i6lef"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_70i5f"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mj5lg"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Level1" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_v86rl")
+volume_db = 7.0
+autoplay = true
+parameters/looping = false
+
+[node name="ComputerHum" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_4ytvr")
+volume_db = 5.991
+autoplay = true
+parameters/looping = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect2" type="ColorRect" parent="CanvasLayer"]
+z_index = 1
+material = ExtResource("4_mhnvy")
+offset_left = -78.0
+offset_right = 1415.0
+offset_bottom = 738.0
+mouse_filter = 2
+color = Color(1, 1, 1, 0.28627452)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+offset_right = 1280.0
+offset_bottom = 720.0
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_con2f")
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_g3eks")
+text = "                                                                                                                                                                    
+         mmmm   mmmm  m    m mmmmmm          mm    mmmm   mmmm  mmmmmm m    m mmmmm  m     m     m        mmmmm  mmmmmm  mmmm  m    m mmmmm  mmmmm  mmmmmm mmmm  
+        #\"   \" m\"  \"m ##  ## #               ##   #\"   \" #\"   \" #      ##  ## #    # #      \"m m\"         #   \"# #      m\"  \"m #    #   #    #   \"# #      #   \"m
+        \"#mmm  #    # # ## # #mmmmm         #  #  \"#mmm  \"#mmm  #mmmmm # ## # #mmmm\" #       \"#\"          #mmmm\" #mmmmm #    # #    #   #    #mmmm\" #mmmmm #    #
+            \"# #    # # \"\" # #              #mm#      \"#     \"# #      # \"\" # #    # #        #           #   \"m #      #    # #    #   #    #   \"m #      #    #
+        \"mmm#\"  #mm#  #    # #mmmmm        #    # \"mmm#\" \"mmm#\" #mmmmm #    # #mmmm\" #mmmmm   #           #    \" #mmmmm  #mm#\" \"mmmm\" mm#mm  #    \" #mmmmm #mmm\" 
+                                                                                                                            #                                    
+\"\"\"\"\"\"                             \"\"\"\"\"\"                                                         \"\"\"\"\"\"                                      
+                                         ASSETS BY WAYNE ZHEN, MUSIC BY RYAN KISH, CODING/LEVEL DESIGN BY ALEX JAKIMOWICZ"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+
+[node name="RunButton" type="Button" parent="CanvasLayer/VBoxContainer/HBoxContainer"]
+show_behind_parent = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 5.62
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_con2f")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_v86rl")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_13sgg")
+theme_override_styles/hover = SubResource("StyleBoxFlat_i6lef")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_70i5f")
+theme_override_styles/focus = SubResource("StyleBoxFlat_mj5lg")
+text = ">RUN"
+script = ExtResource("2_mhnvy")
+
+[node name="QuitButton" type="Button" parent="CanvasLayer/VBoxContainer/HBoxContainer"]
+show_behind_parent = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 5.62
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_con2f")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_v86rl")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_13sgg")
+theme_override_styles/hover = SubResource("StyleBoxFlat_i6lef")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_70i5f")
+theme_override_styles/focus = SubResource("StyleBoxFlat_mj5lg")
+text = ">TERMINATE"
+script = ExtResource("3_4ytvr")
+
+[node name="ResetButton" type="Button" parent="CanvasLayer/VBoxContainer/HBoxContainer"]
+show_behind_parent = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 5.62
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_con2f")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_v86rl")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_13sgg")
+theme_override_styles/hover = SubResource("StyleBoxFlat_i6lef")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_70i5f")
+theme_override_styles/focus = SubResource("StyleBoxFlat_mj5lg")
+text = ">RESET LEVELS"
+script = ExtResource("6_g3eks")

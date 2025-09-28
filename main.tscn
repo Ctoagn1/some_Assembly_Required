@@ -1,0 +1,77 @@
+[gd_scene load_steps=10 format=3 uid="uid://ipa7o2wf0fda"]
+
+[ext_resource type="Texture2D" uid="uid://chsbrc7dtip7x" path="res://assets/MainBackgroundFinal.png" id="1_0xm2m"]
+[ext_resource type="Script" uid="uid://dkheapgabam7v" path="res://main.gd" id="1_7mycd"]
+[ext_resource type="PackedScene" uid="uid://bkjdj7klksada" path="res://scenes/opening.tscn" id="2_h2yge"]
+[ext_resource type="Texture2D" uid="uid://buqjdikgrqxba" path="res://assets/PaperFinal.png" id="3_h2yge"]
+[ext_resource type="PackedScene" path="res://scenes/fadingpaper.tscn" id="4_lquwl"]
+[ext_resource type="Texture2D" uid="uid://beyekyt571840" path="res://assets/glowingpaper(1).png" id="5_7mycd"]
+
+[sub_resource type="Animation" id="Animation_272bh"]
+resource_name = "opacity"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D3:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_5vw27"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D3:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kek77"]
+_data = {
+&"RESET": SubResource("Animation_5vw27"),
+&"opacity": SubResource("Animation_272bh")
+}
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_7mycd")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(642, 360)
+scale = Vector2(1.3333331, 1.3333331)
+texture = ExtResource("1_0xm2m")
+
+[node name="Control" parent="." instance=ExtResource("2_h2yge")]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(642, 359.99997)
+scale = Vector2(1.3333334, 1.3333333)
+texture = ExtResource("3_h2yge")
+
+[node name="TextureButton" type="TextureButton" parent="."]
+offset_left = 18.0
+offset_top = 219.0
+offset_right = 189.0
+offset_bottom = 393.0
+
+[node name="Sprite2D3" parent="." instance=ExtResource("4_lquwl")]
+position = Vector2(151.84657, 311)
+scale = Vector2(1.2764492, 1.2542372)
+texture = ExtResource("5_7mycd")
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="Sprite2D3"]
+root_node = NodePath("../..")
+libraries = {
+&"": SubResource("AnimationLibrary_kek77")
+}
